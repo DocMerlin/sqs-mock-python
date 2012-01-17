@@ -1,0 +1,10 @@
+Copyright Josh Gachnang 2012, josh@servercobra.com, released under the New BSD License.
+
+SQS Mock Python is a mock implementation of the Amazon SQS API. It implements (most) of the API for Connections and Queues, and returns the appropriate values for API calls. 
+It works by holding the queue on disk, and implementing the API calls to work with a file per queue, rather than a distributed system. Unlike SQS, it is able to work in real
+time. When an object is added to the queue, it is instantly available, making testing much easier. Applications can simply make calls to the SQSConnectionMock class instead 
+of the SQSConnection class for testing purposes. This is only desirable if the application you are writing is tolerant of the delays inherent in SQS. If not, you should
+use something like RabbitMQ instead. 
+
+I'll implement the API as needed for my own testing, or if people request/write more calls. Simply file an issue or pull request at https://github.com/pcsforeducation/sqs-mock-python.
+
