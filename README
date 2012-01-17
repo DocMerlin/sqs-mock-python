@@ -6,5 +6,7 @@ time. When an object is added to the queue, it is instantly available, making te
 of the SQSConnection class for testing purposes. This is only desirable if the application you are writing is tolerant of the delays inherent in SQS. If not, you should
 use something like RabbitMQ instead. 
 
+See test_sqs_mock.py for details of how to use the connection and the queue.
+
 I'll implement the API as needed for my own testing, or if people request/write more calls. Simply file an issue or pull request at https://github.com/pcsforeducation/sqs-mock-python.
 
