@@ -2,17 +2,16 @@ import os
 import pickle
 
 class SQSQueueMock:
-	_fp = None
 	name = None
 	def __init__(self, filename, create=False):
 		try:
 			open(filename + ".sqs")
 		except IOError:
 			if create:
-				self._fp = open(filename + ".sqs", 'w')
+				open(filename + ".sqs", 'w')
 			else:
 				raise SyntaxError("Queue %s does not exist" % filename)
-		self.name = filename	
+		self.name = filename
 		
 	def clear(self, page_size=10, vtimeout=10):
 		try:
@@ -99,7 +98,7 @@ class SQSConnectionMock:
 		except IOError:
 			return None
 		try:
-			return SQSQueueMock(queue_file)
+			return SQSQueueMock(queue)
 		except SyntaxError:
 			return None
 			
@@ -126,10 +125,11 @@ class SQSConnectionMock:
 					queue_list.append(q)
 		return queue_list
 	def delete_queue(self, queue, force_deletion=False):
+		q = self.get_queue(queue)
+		#print 'type', type(q)
 		if q.count() != 0:
 			# Can only delete empty queues
 			return False
-		q = self.get_queue(queue)
 		return q.delete()
 		
 	def delete_message(self, queue, message):
